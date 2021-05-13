@@ -19,7 +19,7 @@ const Appbar = () => {
           to="/"
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          Covid 19 Tracker
+          {"Covid 19 Tracker"}
         </Typography>
         <Hidden smDown>
           <Box display="flex" flexDirection="row" ml="auto">
