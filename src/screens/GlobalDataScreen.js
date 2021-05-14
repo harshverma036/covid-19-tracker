@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Grid } from "@material-ui/core";
 import DataCard from "../components/DataCards";
 
 const GlobalDataScreen = () => {
-  return (
+  const [covidData, setCovidData] = useState({});
+
+  useEffect(() => {
+    const getData = async () => {
+      const fetchedData = await fetchData();
+      setCovidData(fetchedData);
+    };
+    getData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await axios.get("https://api.covid19api.com/summary");
+    const finalData = await data.data;
+    return finalData;
+  };
+
+  return !covidData.Global ? (
+    "Loading..."
+  ) : (
     <Grid container justify="center" spacing={3}>
-      <Grid item lg={3} md={4} xs={12}>
-        <DataCard color="#cc00ff" heading="Total Cases" />
-      </Grid>
-      <Grid item lg={3} md={4} xs={12}>
-        <DataCard color="#33cc33" heading="Total Recovered" />
-      </Grid>
-      <Grid item lg={3} md={4} xs={12}>
-        <DataCard color="#ff0000" heading="Total Deaths" />
-      </Grid>
+      <DataCard data={covidData} />
     </Grid>
   );
 };
