@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
+import Loader from "../components/Loader";
 import DataCard from "../components/DataCards";
 
 const GlobalDataScreen = () => {
@@ -21,7 +22,7 @@ const GlobalDataScreen = () => {
   };
 
   return !covidData.Global ? (
-    "Loading..."
+    <Loader />
   ) : (
     <Grid container justify="center" spacing={3}>
       <DataCard data={covidData} />

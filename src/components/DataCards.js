@@ -40,9 +40,20 @@ const DataCards = ({ data }) => {
               "Loading..."
             )}
           </Typography>
-          <Typography variant="subtitle2" style={{ color: "#eee" }}>
-            {data ? new Date(data.Date).toDateString() : "Loading..."}
-          </Typography>
+          <Box display="flex" flexDirection="row" pl={0.5}>
+            <Typography variant="subtitle2" style={{ color: "#eee" }}>
+              {data ? new Date(data.Date).toDateString() : "Loading..."}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              style={{ color: "#eee", marginLeft: 10 }}
+            >
+              {data
+                ? new Date(data.Date).toTimeString().split(" ")[0]
+                : "Loading..."}
+              {" IST"}
+            </Typography>
+          </Box>
         </Paper>
       </Grid>
 
@@ -82,9 +93,20 @@ const DataCards = ({ data }) => {
               "Loading..."
             )}
           </Typography>
-          <Typography variant="subtitle2" style={{ color: "#eee" }}>
-            {data ? new Date(data.Date).toDateString() : "Loading..."}
-          </Typography>
+          <Box display="flex" flexDirection="row" pl={0.5}>
+            <Typography variant="subtitle2" style={{ color: "#eee" }}>
+              {data ? new Date(data.Date).toDateString() : "Loading..."}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              style={{ color: "#eee", marginLeft: 10 }}
+            >
+              {data
+                ? new Date(data.Date).toTimeString().split(" ")[0]
+                : "Loading..."}
+              {" IST"}
+            </Typography>
+          </Box>
         </Paper>
       </Grid>
 
@@ -124,9 +146,20 @@ const DataCards = ({ data }) => {
               "Loading..."
             )}
           </Typography>
-          <Typography variant="subtitle2" style={{ color: "#eee" }}>
-            {data ? new Date(data.Date).toDateString() : "Loading..."}
-          </Typography>
+          <Box display="flex" flexDirection="row" pl={0.5}>
+            <Typography variant="subtitle2" style={{ color: "#eee" }}>
+              {data ? new Date(data.Date).toDateString() : "Loading..."}
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              style={{ color: "#eee", marginLeft: 10 }}
+            >
+              {data
+                ? new Date(data.Date).toTimeString().split(" ")[0]
+                : "Loading..."}
+              {" IST"}
+            </Typography>
+          </Box>
         </Paper>
       </Grid>
     </>
