@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Button, Container, Grid } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 import Select from "react-select";
 import Loader from "../components/Loader";
+import CountryData from "../components/CountryData";
 
 const CountryDataScreen = () => {
   const [countryList, setCountryList] = useState([]);
   const [countriesData, setCountriesData] = useState({});
+  const [filteredData, setFilteredData] = useState(undefined);
 
   const options = countryList.map((country) => {
     return { label: country.Country, value: country.Slug };
   });
+
+  const showData = (data) => {
+    return <CountryData data={data} />;
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -24,7 +30,7 @@ const CountryDataScreen = () => {
       const fetchedData = await fetchData();
       if (fetchedData) {
         setCountriesData(fetchedData);
-        console.log(fetchedData);
+        // console.log(fetchedData);
       }
     };
 
@@ -48,7 +54,8 @@ const CountryDataScreen = () => {
     if (countryData.length > 0) {
       if (e.value !== null) {
         const country = countryData.find((c) => c.Slug === e.value);
-        console.log(country);
+        setFilteredData(country);
+        // console.log(filteredData);
       }
     }
   };
@@ -73,10 +80,23 @@ const CountryDataScreen = () => {
         </Grid>
 
         {/* DISPLAY DATA */}
-        <Grid justify="center" container style={{ marginTop: 12 }}>
-          <Grid item xs={12} md={4} lg={3}>
-            {!countriesData.Countries ? <Loader /> : "DATA"}
+        <Grid justify="center" container style={{ marginTop: 12 }} spacing={2}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h3"
+              color="primary"
+              style={{ textAlign: "center", fontWeight: "bold" }}
+            >
+              {filteredData !== undefined ? filteredData.Country : null}
+            </Typography>
           </Grid>
+          {/* <Grid item xs={12} md={4} lg={3}> */}
+          {!countriesData.Countries ? (
+            <Loader />
+          ) : (
+            <>{showData(filteredData)}</>
+          )}
+          {/* </Grid> */}
         </Grid>
       </Container>
     </>
