@@ -1,120 +1,129 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Button, Grid, Hidden } from "@material-ui/core";
-import Select from "react-select";
+import {
+  Grid,
+  Table,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableBody,
+  Paper,
+  TableContainer,
+} from "@material-ui/core";
+import CountUp from "react-countup";
+import Loader from "../components/Loader";
 
 const CountryWiseDataScreen = () => {
-  const [countryList, setCountryList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [enableSearch, setEnableSearch] = useState(false);
-
-  const options = countryList.map((country) => {
-    return { label: country.Country, value: country.Slug };
-  });
+  const [countriesData, setCountriesData] = useState({});
 
   useEffect(() => {
-    const getData = async () => {
-      const fetchedCountry = await fetchCountry();
-      if (fetchedCountry) {
-        setCountryList(fetchedCountry);
+    const getCountryData = async () => {
+      const fetchedData = await fetchData();
+      if (fetchedData) {
+        setCountriesData(fetchedData);
+        console.log(fetchedData);
       }
     };
 
-    getData();
+    getCountryData();
   }, []);
-
-  const fetchCountry = async () => {
-    const { data } = await axios.get("https://api.covid19api.com/countries");
-    return data;
-  };
 
   const fetchData = async () => {
     const { data } = await axios.get("https://api.covid19api.com/summary");
     return data;
   };
 
-  const changeCountryHandler = async (e) => {
-    // console.log(e.value);
-    const fetchedData = await fetchData();
-    const countryData = fetchedData.Countries;
-    const country = countryData.find((c) => c.Slug === e.value);
-    console.log(country);
-  };
-
   return (
-    <Grid container justify="center">
-      <Grid item xs={12} md={5} lg={4}>
-        {enableSearch && (
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            isDisabled={false}
-            isLoading={countryList.length === 0}
-            isClearable={true}
-            isRtl={false}
-            isSearchable={true}
-            name="Country"
-            onChange={(e) => changeCountryHandler(e)}
-            options={options}
-          />
-        )}
-        <Box display="flex" flexDirection="row" mt={2}>
-          <Button
-            variant="outlined"
-            size="medium"
-            style={{
-              color: "#cc00ff",
-              borderColor: "#cc00ff",
-              fontWeight: "bold",
-            }}
-          >
-            {"Confirmed"}
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            style={{
-              marginLeft: 4,
-              marginRight: 4,
-              color: "#33cc33",
-              borderColor: "#33cc33",
-              fontWeight: "bold",
-            }}
-            size="medium"
-          >
-            {"Recovered"}
-          </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            size="medium"
-            style={{
-              color: "#ff0000",
-              borderColor: "#ff0000",
-              fontWeight: "bold",
-            }}
-          >
-            {"Deaths"}
-          </Button>
-          <Hidden mdDown>
-            <Button
-              variant="outlined"
-              color="primary"
-              style={{
-                marginLeft: 4,
-                color: "#996600",
-                borderColor: "#996600",
-                fontWeight: "bold",
-              }}
-              size="medium"
-              onClick={() => setEnableSearch(!enableSearch)}
-            >
-              {"Search"}
-            </Button>
-          </Hidden>
-        </Box>
+    <>
+      {/* DISPLAY DATA */}
+      <Grid justify="center" container style={{ marginTop: 12 }}>
+        <Grid item xs={12}>
+          {!countriesData.Countries ? (
+            <Loader />
+          ) : (
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell style={{ fontSize: 20 }}>{"Country"}</TableCell>
+                    <TableCell style={{ fontSize: 20 }}>
+                      {"Confirmed"}
+                    </TableCell>
+                    <TableCell style={{ fontSize: 20 }}>
+                      {"Recovered"}
+                    </TableCell>
+                    <TableCell style={{ fontSize: 20 }}>{"Deaths"}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {countriesData.Countries.map((data) => (
+                    <TableRow key={data.ID}>
+                      <TableCell style={{ fontSize: 16 }}>
+                        {data.Country}
+                      </TableCell>
+                      <TableCell style={{ fontSize: 16 }}>
+                        <CountUp
+                          start={0}
+                          end={data.TotalConfirmed}
+                          duration={1}
+                          separator=","
+                        />
+                        <span style={{ fontSize: 13, color: "#cc00ff" }}>
+                          &nbsp; (+
+                          <CountUp
+                            start={0}
+                            end={data.NewConfirmed}
+                            duration={1}
+                            separator=","
+                          />
+                          )
+                        </span>
+                      </TableCell>
+                      <TableCell style={{ fontSize: 16 }}>
+                        <CountUp
+                          start={0}
+                          end={data.TotalRecovered}
+                          duration={1}
+                          separator=","
+                        />
+                        <span style={{ fontSize: 13, color: "#33cc33" }}>
+                          &nbsp; (+
+                          <CountUp
+                            start={0}
+                            end={data.NewRecovered}
+                            duration={1}
+                            separator=","
+                          />
+                          )
+                        </span>
+                      </TableCell>
+                      <TableCell style={{ fontSize: 16 }}>
+                        <CountUp
+                          start={0}
+                          end={data.TotalDeaths}
+                          duration={1}
+                          separator=","
+                        />
+                        <span style={{ fontSize: 13, color: "#ff0000" }}>
+                          &nbsp; (+
+                          <CountUp
+                            start={0}
+                            end={data.NewDeaths}
+                            duration={1}
+                            separator=","
+                          />
+                          )
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 
