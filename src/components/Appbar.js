@@ -36,6 +36,16 @@ const Appbar = () => {
               variant="contained"
               color="secondary"
               size="large"
+              style={{ marginRight: 8, fontSize: 16 }}
+              component={Link}
+              to="/country/all"
+            >
+              {"All Countires"}
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
               style={{ fontSize: 16 }}
               component={Link}
               to="/country"

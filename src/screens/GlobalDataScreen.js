@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Grid } from "@material-ui/core";
+import { Box, Container, Grid } from "@material-ui/core";
 import Loader from "../components/Loader";
 import DataCard from "../components/DataCards";
 
@@ -22,11 +22,15 @@ const GlobalDataScreen = () => {
   };
 
   return !covidData.Global ? (
-    <Loader />
+    <Box mt={10}>
+      <Loader />
+    </Box>
   ) : (
-    <Grid container justify="center" spacing={3}>
-      <DataCard data={covidData} />
-    </Grid>
+    <Container maxWidth="lg" style={{ marginTop: 100 }}>
+      <Grid container justify="center" spacing={3}>
+        <DataCard data={covidData} />
+      </Grid>
+    </Container>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   TableBody,
   Paper,
   TableContainer,
+  Container,
 } from "@material-ui/core";
 import CountUp from "react-countup";
 import Loader from "../components/Loader";
@@ -36,93 +37,97 @@ const CountryWiseDataScreen = () => {
   return (
     <>
       {/* DISPLAY DATA */}
-      <Grid justify="center" container style={{ marginTop: 12 }}>
-        <Grid item xs={12}>
-          {!countriesData.Countries ? (
-            <Loader />
-          ) : (
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell style={{ fontSize: 20 }}>{"Country"}</TableCell>
-                    <TableCell style={{ fontSize: 20 }}>
-                      {"Confirmed"}
-                    </TableCell>
-                    <TableCell style={{ fontSize: 20 }}>
-                      {"Recovered"}
-                    </TableCell>
-                    <TableCell style={{ fontSize: 20 }}>{"Deaths"}</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {countriesData.Countries.map((data) => (
-                    <TableRow key={data.ID}>
-                      <TableCell style={{ fontSize: 16 }}>
-                        {data.Country}
+      <Container maxWidth="lg" style={{ marginTop: 71, padding: 0 }}>
+        <Grid justify="center" container>
+          <Grid item xs={12} style={{ paddingLeft: 1 }}>
+            {!countriesData.Countries ? (
+              <Loader />
+            ) : (
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell style={{ fontSize: 20 }}>
+                        {"Country"}
                       </TableCell>
-                      <TableCell style={{ fontSize: 16 }}>
-                        <CountUp
-                          start={0}
-                          end={data.TotalConfirmed}
-                          duration={1}
-                          separator=","
-                        />
-                        <span style={{ fontSize: 13, color: "#cc00ff" }}>
-                          &nbsp; (+
-                          <CountUp
-                            start={0}
-                            end={data.NewConfirmed}
-                            duration={1}
-                            separator=","
-                          />
-                          )
-                        </span>
+                      <TableCell style={{ fontSize: 20 }}>
+                        {"Confirmed"}
                       </TableCell>
-                      <TableCell style={{ fontSize: 16 }}>
-                        <CountUp
-                          start={0}
-                          end={data.TotalRecovered}
-                          duration={1}
-                          separator=","
-                        />
-                        <span style={{ fontSize: 13, color: "#33cc33" }}>
-                          &nbsp; (+
-                          <CountUp
-                            start={0}
-                            end={data.NewRecovered}
-                            duration={1}
-                            separator=","
-                          />
-                          )
-                        </span>
+                      <TableCell style={{ fontSize: 20 }}>
+                        {"Recovered"}
                       </TableCell>
-                      <TableCell style={{ fontSize: 16 }}>
-                        <CountUp
-                          start={0}
-                          end={data.TotalDeaths}
-                          duration={1}
-                          separator=","
-                        />
-                        <span style={{ fontSize: 13, color: "#ff0000" }}>
-                          &nbsp; (+
-                          <CountUp
-                            start={0}
-                            end={data.NewDeaths}
-                            duration={1}
-                            separator=","
-                          />
-                          )
-                        </span>
-                      </TableCell>
+                      <TableCell style={{ fontSize: 20 }}>{"Deaths"}</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          )}
+                  </TableHead>
+                  <TableBody>
+                    {countriesData.Countries.map((data) => (
+                      <TableRow key={data.ID}>
+                        <TableCell style={{ fontSize: 16 }}>
+                          {data.Country}
+                        </TableCell>
+                        <TableCell style={{ fontSize: 16 }}>
+                          <CountUp
+                            start={0}
+                            end={data.TotalConfirmed}
+                            duration={1}
+                            separator=","
+                          />
+                          <span style={{ fontSize: 13, color: "#cc00ff" }}>
+                            &nbsp; (+
+                            <CountUp
+                              start={0}
+                              end={data.NewConfirmed}
+                              duration={1}
+                              separator=","
+                            />
+                            )
+                          </span>
+                        </TableCell>
+                        <TableCell style={{ fontSize: 16 }}>
+                          <CountUp
+                            start={0}
+                            end={data.TotalRecovered}
+                            duration={1}
+                            separator=","
+                          />
+                          <span style={{ fontSize: 13, color: "#33cc33" }}>
+                            &nbsp; (+
+                            <CountUp
+                              start={0}
+                              end={data.NewRecovered}
+                              duration={1}
+                              separator=","
+                            />
+                            )
+                          </span>
+                        </TableCell>
+                        <TableCell style={{ fontSize: 16 }}>
+                          <CountUp
+                            start={0}
+                            end={data.TotalDeaths}
+                            duration={1}
+                            separator=","
+                          />
+                          <span style={{ fontSize: 13, color: "#ff0000" }}>
+                            &nbsp; (+
+                            <CountUp
+                              start={0}
+                              end={data.NewDeaths}
+                              duration={1}
+                              separator=","
+                            />
+                            )
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </>
   );
 };
