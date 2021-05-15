@@ -93,7 +93,7 @@ const DataCards = ({ data }) => {
               "Loading..."
             )}
           </Typography>
-          <Box display="flex" flexDirection="row" pl={0.5}>
+          <Box display="flex" flexDirection="row">
             <Typography variant="subtitle2" style={{ color: "#eee" }}>
               {data ? new Date(data.Date).toDateString() : "Loading..."}
             </Typography>
@@ -146,7 +146,7 @@ const DataCards = ({ data }) => {
               "Loading..."
             )}
           </Typography>
-          <Box display="flex" flexDirection="row" pl={0.5}>
+          <Box display="flex" flexDirection="row">
             <Typography variant="subtitle2" style={{ color: "#eee" }}>
               {data ? new Date(data.Date).toDateString() : "Loading..."}
             </Typography>
