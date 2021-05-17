@@ -15,7 +15,7 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 ## Screenshots
-![Global_Data](https://github.com/harshverma036/covid-19-tracker/blob/master/images/Global_data.png)
-![All_Countries_Data](https://github.com/harshverma036/covid-19-tracker/blob/master/images/All_counties_data.png)
-![Select_Country](https://github.com/harshverma036/covid-19-tracker/blob/master/images/country_wise.png)
-![Country_Wise_data](https://github.com/harshverma036/covid-19-tracker/blob/master/images/country_wise_data.png)
+![Global_Data](https://github.com/harshverma036/covid-19-tracker/blob/master/images/Global_data.png)\
+![All_Countries_Data](https://github.com/harshverma036/covid-19-tracker/blob/master/images/All_counties_data.png)\
+![Select_Country](https://github.com/harshverma036/covid-19-tracker/blob/master/images/country_wise.png)\
+![Country_Wise_data](https://github.com/harshverma036/covid-19-tracker/blob/master/images/country_wise_data.png)\
