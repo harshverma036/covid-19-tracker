@@ -1,6 +1,6 @@
 # Covid 19 Tracker
 
-This is a covid-19 tracker using ReactJS [Live]("https://covid19tracker4u.netlify.app/").
+This is a covid-19 tracker using ReactJS [Live](https://covid19tracker4u.netlify.app/).
 
 ## Available Scripts
 
