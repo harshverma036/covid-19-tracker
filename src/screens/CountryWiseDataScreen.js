@@ -10,12 +10,15 @@ import {
   Paper,
   TableContainer,
   Container,
+  TablePagination
 } from "@material-ui/core";
 import CountUp from "react-countup";
 import Loader from "../components/Loader";
 
 const CountryWiseDataScreen = () => {
   const [countriesData, setCountriesData] = useState({});
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     const getCountryData = async () => {
@@ -34,15 +37,24 @@ const CountryWiseDataScreen = () => {
     return data;
   };
 
+  const changePageHandler = (e, nextPage) => {
+    setPage(nextPage);
+  }
+
+  const changeRowsPerPageHandler = (e) => {
+    setRowsPerPage(e.target.value)
+  }
+
   return (
     <>
       {/* DISPLAY DATA */}
-      <Container maxWidth="lg" style={{ marginTop: 71, padding: 0 }}>
+      <Container maxWidth="lg" style={{ marginTop: 95, padding: 0 }}>
         <Grid justify="center" container>
           <Grid item xs={12} style={{ paddingLeft: 1 }}>
             {!countriesData.Countries ? (
               <Loader />
             ) : (
+              <>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
@@ -60,7 +72,7 @@ const CountryWiseDataScreen = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {countriesData.Countries.map((data) => (
+                    {countriesData.Countries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((data) => (
                       <TableRow key={data.ID}>
                         <TableCell style={{ fontSize: 16 }}>
                           {data.Country}
@@ -123,7 +135,16 @@ const CountryWiseDataScreen = () => {
                     ))}
                   </TableBody>
                 </Table>
+              <TablePagination 
+              rowsPerPageOptions={[10, 20, 30, 40, 50]}
+              count={countriesData.Countries.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={changePageHandler}
+              onChangeRowsPerPage={changeRowsPerPageHandler}
+              />
               </TableContainer>
+              </>
             )}
           </Grid>
         </Grid>
