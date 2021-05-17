@@ -1,8 +1,18 @@
-@font-face {
-  font-family: "Poppins";
-  src: local("Poppins"), url("./Poppins-Regular.ttf") format("truetype");
+.footer-gh-btn {
+  cursor: pointer;
+  transition-duration: 0.2s;
 }
 
-body {
-  font-family: Poppins;
+.footer-gh-btn:hover {
+  color: rgb(68, 66, 66);
+}
+
+.footer-dev-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: tomato;
+}
+
+.footer-dev-link:hover {
+  color: #000;
 }
